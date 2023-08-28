@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import instance from '../api/axios';
+// import { login } from '../api/login';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function Login() {
   const [isIdValue, setIsIdValue] = useState<string>('');
   const [isPwValue, setIsPwValue] = useState<string>('');
+  const { login } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -15,22 +17,13 @@ export default function Login() {
     setIsPwValue(e.target.value);
   }, []);
 
-  const handleLogin = async (isIdValue: string, isPwValue: string) => {
-    await instance
-      .post('/signin', {
-        id: isIdValue,
-        password: isPwValue,
-      })
-      .then((res) => {
-        if (res.data.accessToken) {
-          const token = res.data.accessToken;
-          localStorage.setItem('token', token);
-          navigate('/');
-        }
-      })
-      .catch((error) => {
-        window.console.log(error);
-      });
+  const handleLogin = () => {
+    window.console.log('dddd');
+
+    login(isIdValue, isPwValue);
+    //.then(() => {
+    //  navigate('/');
+    //});
   };
 
   return (
@@ -61,7 +54,7 @@ export default function Login() {
           <button
             type="submit"
             className="w-full border border-black bg-black text-white p-3"
-            onClick={() => handleLogin(isIdValue, isPwValue)}
+            onClick={() => handleLogin()}
           >
             로그인
           </button>

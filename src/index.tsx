@@ -12,6 +12,7 @@ import Carts from './pages/Carts';
 import AddProduct from './pages/AddProduct';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -24,23 +25,29 @@ const router = createBrowserRouter([
       { path: `/products/:id`, element: <ProductDetail /> },
       {
         path: '/carts',
-        element: <Carts />,
+        element: (
+          <ProtectedRoute>
+            <Carts />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/products/new',
-        element: <AddProduct />,
+        element: (
+          <ProtectedRoute requireAdmin>
+            <AddProduct />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <Signup />,
       },
     ],
-  },
-  {
-    path: '/login',
-    element: <Login />,
-    errorElement: <NotFound />,
-  },
-  {
-    path: '/signup',
-    element: <Signup />,
-    errorElement: <NotFound />,
   },
 ]);
 
