@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface nickname {
-  user: string;
+  user: string | null;
 }
 
 export default function User({ user }: nickname) {
