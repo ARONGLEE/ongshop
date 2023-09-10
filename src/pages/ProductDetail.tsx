@@ -12,15 +12,20 @@ export default function ProductDetail() {
   } = useLocation();
 
   const [selected, setSelected] = useState(option && option[0]);
-  window.console.log(option);
-
+  const [success, setSuccess] = useState('');
+  const quantity: number = 1;
+  const memberNoValue = localStorage.getItem('memberNo')!;
+  const memberNo = parseInt(memberNoValue, 10);
+  window.console.log(memberNo);
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
   };
+
   const handleClick = () => {
     // (no키값을 productNo로 변경해서 보내기)
     // const product = { no, memberNo: 1, option: selected, quantity: 1 };
-    carts(no, 1, selected, '1');
+    carts(no, memberNo, selected, quantity);
+    setSuccess('장바구니에 추가되었습니다.');
   };
 
   return (
@@ -42,11 +47,11 @@ export default function ProductDetail() {
             {option && option.map((size: string, idx: number) => <option key={idx}>{size}</option>)}
           </select>
         </div>
-        {/* {success && <p className="my-2">⭐️{success}</p>} */}
+        {success && <p className="my-2">⭐️{success}</p>}
         <button
           className="border border-black bg-black text-white font-googleRoboto p-3 my-1.5"
           onClick={handleClick}
-          disabled={user === null || undefined}
+          disabled={user === null || undefined || false}
         >
           {`ADD \u00A0\u00A0\u00A0\u00A0 ₩${price}`}
         </button>

@@ -1,14 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
+import CartStatus from './CartStatus';
 import User from './User';
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { user, nickname, admin } = useAuthContext();
-
-  window.console.log(user);
-  window.console.log(nickname);
+  const { user } = useAuthContext();
+  const admin = localStorage.getItem('admin') === 'true';
+  const nickname = localStorage.getItem('nickname');
   window.console.log(admin);
+  window.console.log(user);
 
   return (
     <header className="flex flex-row justify-between py-2.5 border-b border-gray-300">
@@ -19,9 +20,13 @@ export default function Navbar() {
         <Link to="/products">
           <div className="mx-4 cursor-grabbing">Products</div>
         </Link>
-        <Link to="/carts">
-          <div className="mx-4 cursor-grabbing">Carts</div>
-        </Link>
+        {user && (
+          <Link to="/carts">
+            <div className="mx-4 cursor-grabbing">
+              <CartStatus />
+            </div>
+          </Link>
+        )}
         {user && admin && (
           <Link to="/products/new">
             <div
@@ -49,7 +54,8 @@ export default function Navbar() {
           <div
             className="mx-4 cursor-grabbing"
             onClick={() => {
-              navigate('/');
+              localStorage.removeItem('token');
+              window.location.replace('/');
             }}
           >
             Logout
