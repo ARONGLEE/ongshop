@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 
 interface product {
   title: string;
-  price: string;
+  price: number;
   category: string;
   explanation: string;
   option: string;
@@ -13,7 +13,7 @@ export default function AddProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = useState<product>({
     title: '',
-    price: '',
+    price: 0,
     category: '',
     explanation: '',
     option: '',
@@ -44,7 +44,7 @@ export default function AddProduct() {
       swal('⭐️ 제품이 등록되었습니다.');
       setIsLoading(false);
       setFile(null);
-      setProduct({ title: '', price: '', category: '', explanation: '', option: '' });
+      setProduct({ title: '', price: 0, category: '', explanation: '', option: '' });
       if (fileInput.current) {
         fileInput.current.value = '';
       }

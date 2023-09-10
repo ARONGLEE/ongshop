@@ -8,7 +8,7 @@ interface Product {
   category: string;
   explanation: string;
   option: string[];
-  price: string;
+  price: number;
 }
 
 interface ProductCardProps {

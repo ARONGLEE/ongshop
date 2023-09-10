@@ -2,7 +2,7 @@ import instance from './axios';
 
 interface product {
   title: string;
-  price: string;
+  price: number;
   category: string;
   explanation: string;
   option: string;
@@ -13,7 +13,7 @@ export async function upload(file: File, product: product) {
 
   formData.append('file', file);
   formData.append('title', product.title);
-  formData.append('price', product.price);
+  formData.append('price', product.price.toString());
   formData.append('category', product.category);
   formData.append('explanation', product.explanation);
   formData.append('option', product.option);

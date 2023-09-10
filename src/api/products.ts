@@ -1,13 +1,13 @@
 import instance from './axios';
 
-export interface Product {
+interface Product {
   no: number;
   imgUrl: string;
   title: string;
   category: string;
   explanation: string;
   option: string[];
-  price: string;
+  price: number;
 }
 
 export async function getProductListInfinitely(lastProductNo: number, size: number) {
