@@ -30,13 +30,13 @@ export default function CartItem({ product }: { product: CartProduct }) {
         <img src={product.imgUrl} alt={product.title} className="w-24 md:w-48 max-h-32" />
         <div className="flex flex-1 justify-between ml-4">
           <div className="basis-3/5">
-            <p className="text-lg">{product.title}</p>
-            <p className="text-lg font-semibold font-googleRoboto">{product.option}</p>
-            <p>₩{product.price}</p>
+            <p className="text-base font-nanumSquareNeoL">{product.title}</p>
+            <p className="text-base font-semibold font-googleRoboto">{product.option}</p>
+            <p className="text-sm font-semibold font-nanumSquareNeoR">₩{product.price}</p>
           </div>
           <div className="text-lg flex items-center">
             <AiOutlineMinusSquare className={ICON_CLASS} onClick={handleMinus} />
-            <span>{product.quantity}</span>
+            <span className="text-base font-nanumSquareNeoR">{product.quantity}</span>
             <AiOutlinePlusSquare className={ICON_CLASS} onClick={handlePlus} />
             <RiDeleteBin5Fill className={ICON_CLASS} onClick={handleDelete} />
           </div>

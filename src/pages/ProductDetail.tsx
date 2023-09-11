@@ -47,7 +47,7 @@ export default function ProductDetail() {
             {option && option.map((size: string, idx: number) => <option key={idx}>{size}</option>)}
           </select>
         </div>
-        {success && <p className="my-2">⭐️{success}</p>}
+        {success && <p className="font-nanumSquareNeoR">⭐️ {success}</p>}
         <button
           className="border border-black bg-black text-white font-googleRoboto p-3 my-1.5"
           onClick={handleClick}

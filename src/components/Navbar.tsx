@@ -12,9 +12,9 @@ export default function Navbar() {
   window.console.log(user);
 
   return (
-    <header className="flex flex-row justify-between py-2.5 border-b border-gray-300">
+    <header className="flex flex-row justify-between py-3 border-b border-gray-300">
       <Link to="/">
-        <h1 className="mx-4 text-2xl font-bold font-googleOswald cursor-grabbing">ONGSHOP</h1>
+        <h1 className="mx-4 text-3xl font-bold font-googleOswald cursor-grabbing">ONGSHOP</h1>
       </Link>
       <nav className="flex items-end text-base font-googleRoboto">
         <Link to="/products">

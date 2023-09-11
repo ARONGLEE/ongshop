@@ -27,10 +27,10 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       <img className="w-full h-72" src={imgUrl} alt={title} />
       <div className="mt-2 px-2 text-lg flex justify-between items-center">
-        <h3 className="truncate">{title}</h3>
-        <p>{`₩${price}`}</p>
+        <h3 className="text-base truncate font-nanumSquareNeoR">{title}</h3>
+        <p className="text-base font-nanumSquareNeoR">{`₩${price}`}</p>
       </div>
-      <p className="mb-2 px-2 text-gray-600">{category}</p>
+      <p className="mb-2 px-2 text-gray-600 font-googleRoboto">{category}</p>
     </li>
   );
 }

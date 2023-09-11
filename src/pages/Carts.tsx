@@ -26,8 +26,8 @@ export default function Carts() {
 
   return (
     <section className="p-8 flex flex-col">
-      <p className="text-xl text-center font-semibold pb-4 font-googleRoboto">Cart</p>
-      {!hasProducts && <p>장바구니에 상품이 없습니다.</p>}
+      <p className="text-lg text-center font-semibold pb-4 font-nanumSquareNeoR">장바구니</p>
+      {!hasProducts && <p className="font-nanumSquareNeoR">장바구니에 상품이 없습니다.</p>}
       {hasProducts && (
         <>
           <ul className="border-b border-gray-300 mb-8 p-4 px-8">
