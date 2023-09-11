@@ -1,34 +1,32 @@
-import { useCallback, useState } from 'react';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import instance from '../api/axios';
+import { signup } from '../api/auth';
+
+interface FormValues {
+  id: string;
+  nickname: string;
+  password: string;
+  passwordCheck: string;
+}
 
 export default function Signup() {
-  const [isIdValue, setIsIdValue] = useState<string>('');
-  const [isNicknameValue, setIsNicknameValue] = useState<string>('');
-  const [isPwValue, setIsPwValue] = useState<string>('');
-  // const [isPwCheckValue, setIsPwCheckValue] = useState<string>('');
   const navigate = useNavigate();
 
-  const onChangeId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsIdValue(e.target.value);
-  }, []);
-  const onChangeNickname = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsNicknameValue(e.target.value);
-  }, []);
-  const onChangePw = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsPwValue(e.target.value);
-  }, []);
-  // const onChangePwCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setIsPwCheckValue(e.target.value);
-  // }, []);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>({ mode: 'onChange' });
 
-  const handleSignup = async (isIdValue: string, isNicknameValue: string, isPwValue: string) => {
-    await instance
-      .post('/members', {
-        id: isIdValue,
-        password: isPwValue,
-        nickname: isNicknameValue,
-      })
+  const password = useRef<string>('');
+  password.current = watch('password');
+
+  const onSubmit = (data: FormValues) => {
+    window.console.log(data);
+    const { id, password, nickname } = data;
+    signup(id, nickname, password)
       .then(() => {
         navigate('/login');
       })
@@ -40,63 +38,138 @@ export default function Signup() {
   return (
     <>
       <div className="flex flex-col my-5 w-3/6 mx-auto">
-        <h1 className="font-medium my-4">회원가입</h1>
-        <label className="block">
-          <span className="block my-1.5 text-sm font-medium text-slate-700">아이디</span>
-          <input
-            type="text"
-            required
-            onChange={onChangeId}
-            className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
-            placeholder="아이디"
-          />
-        </label>
-        <label className="block">
-          <span className="block my-1.5 text-sm font-medium text-slate-700">닉네임</span>
-          <input
-            type="text"
-            required
-            onChange={onChangeNickname}
-            className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
-            placeholder="닉네임"
-          />
-        </label>
-        <label className="block">
-          <span className="block my-1.5 text-sm font-medium text-slate-700">비밀번호</span>
-          <input
-            type="password"
-            required
-            onChange={onChangePw}
-            className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
-            placeholder="비밀번호"
-          />
-        </label>
-        <label className="block">
-          <span className="block my-1.5 text-sm font-medium text-slate-700">비밀번호 확인</span>
-          <input
-            type="password"
-            required
-            // onChange={onChangePwCheck}
-            className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
-            placeholder="비밀번호 확인"
-          />
-        </label>
-        <div className="flex flex-row justify-center my-4">
-          <button
-            type="submit"
-            className="w-1/4 border border-black p-3 mr-3"
-            onClick={() => navigate(-1)}
-          >
-            취소
-          </button>
-          <button
-            type="submit"
-            className="w-1/4 border border-black bg-black text-white p-3"
-            onClick={() => handleSignup(isIdValue, isNicknameValue, isPwValue)}
-          >
-            가입완료
-          </button>
-        </div>
+        <h1 className="font-semibold my-6 font-nanumSquareNeoR text-lg">회원가입</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label className="block">
+            <span className="block my-1.5 text-sm font-medium text-slate-700 font-nanumSquareNeoR">
+              아이디
+            </span>
+            <input
+              type="text"
+              required
+              className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
+              placeholder="아이디"
+              {...register('id', {
+                minLength: {
+                  value: 4,
+                  message: '아이디는 최소 4글자입니다.',
+                },
+                maxLength: {
+                  value: 20,
+                  message: '아이디는 최대 20글자입니다.',
+                },
+                required: true,
+                pattern: {
+                  value: /^[a-zA-z0-9]+$/,
+                  message: '아이디는 영어 대/소문자, 숫자만 가능합니다',
+                },
+              })}
+            />
+            {errors?.id && (
+              <p className="font-nanumSquareNeoR text-xs text-[#D0312D]">{errors.id.message}</p>
+            )}
+          </label>
+          <label className="block">
+            <span className="block my-1.5 text-sm font-medium text-slate-700 font-nanumSquareNeoR">
+              닉네임
+            </span>
+            <input
+              type="text"
+              required
+              className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
+              {...register('nickname', {
+                maxLength: {
+                  value: 10,
+                  message: '닉네임은 최대 10글자입니다.',
+                },
+                required: true,
+              })}
+              placeholder="닉네임"
+            />
+            {errors?.nickname && (
+              <p className="font-nanumSquareNeoR text-xs text-[#D0312D]">
+                {errors.nickname.message}
+              </p>
+            )}
+          </label>
+          <label className="block">
+            <span className="block my-1.5 text-sm font-medium text-slate-700 font-nanumSquareNeoR">
+              비밀번호
+            </span>
+            <input
+              type="password"
+              required
+              className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
+              {...register('password', {
+                minLength: {
+                  value: 8,
+                  message: '비밀번호는 최소 8글자입니다.',
+                },
+                maxLength: {
+                  value: 20,
+                  message: '비밀번호는 최대 20글자입니다.',
+                },
+                required: true,
+                pattern: {
+                  value: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*+=])(?!.*\\s).*$/,
+                  message: '비밀번호는 숫자+영어+특수문자 조합으로 입력해주세요.',
+                },
+              })}
+              placeholder="비밀번호"
+            />
+            {errors?.password && (
+              <p className="font-nanumSquareNeoR text-xs text-[#D0312D]">
+                {errors.password.message}
+              </p>
+            )}
+          </label>
+          <label className="block">
+            <span className="block my-1.5 text-sm font-medium text-slate-700 font-nanumSquareNeoR">
+              비밀번호 확인
+            </span>
+            <input
+              type="password"
+              required
+              className="w-full h-10 px-3 mb-2 text-xs text-gray-700 placeholder-gray-600 border focus:shadow-outline"
+              {...register('passwordCheck', {
+                minLength: {
+                  value: 8,
+                  message: '비밀번호는 최소 8글자입니다.',
+                },
+                maxLength: {
+                  value: 20,
+                  message: '비밀번호는 최대 20글자입니다.',
+                },
+                required: true,
+                validate: (value) => {
+                  if (value !== password.current) {
+                    return '비밀번호가 일치하지 않습니다.';
+                  }
+                },
+              })}
+              placeholder="비밀번호 확인"
+            />
+            {errors?.passwordCheck && (
+              <p className="font-nanumSquareNeoR text-xs text-[#D0312D]">
+                {errors.passwordCheck.message}
+              </p>
+            )}
+          </label>
+          <div className="flex flex-row justify-center my-4">
+            {/* <button
+              className="w-1/4 border border-black p-3 mr-3 font-nanumSquareNeoR"
+              onClick={() => navigate(-1)}
+            >
+              취소
+            </button> */}
+            <button
+              type="submit"
+              className="w-1/4 border border-black bg-black text-white p-3 font-nanumSquareNeoR"
+            >
+              가입완료
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );
