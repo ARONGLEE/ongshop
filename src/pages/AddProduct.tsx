@@ -9,6 +9,7 @@ interface product {
   explanation: string;
   option: string;
 }
+
 export default function AddProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = useState<product>({
@@ -53,9 +54,7 @@ export default function AddProduct() {
 
   return (
     <div className="flex flex-col my-5 w-7/12 mx-auto">
-      <h1 className="text-center font-googleRoboto font-semibold text-xl">
-        Register a new product
-      </h1>
+      <p className="text-lg text-center font-nanumSquareNeoR font-semibold pb-4">상품 등록</p>
 
       {file && (
         <img src={URL.createObjectURL(file)} className="max-h-[35rem] mt-5" alt="local file" />
