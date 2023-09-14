@@ -1,15 +1,9 @@
-// import { useQuery } from '@tanstack/react-query';
-
-import { useQuery } from '@tanstack/react-query';
-import { getCart } from '../api/carts';
+import useCart from '../hooks/useCart';
 
 export default function CartStatus() {
-  const memberNoValue = localStorage.getItem('memberNo')!;
-  const memberNo = parseInt(memberNoValue, 10);
-  getCart(memberNo);
-
-  const { data: products } = useQuery(['carts'], () => getCart(memberNo));
-  // window.console.log(products.length);
+  const {
+    getCartItem: { data: products },
+  } = useCart();
 
   return (
     <div className="flex flex-row items-center">

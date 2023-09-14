@@ -1,12 +1,5 @@
 import instance from './axios';
 
-// interface Product {
-//   productNo: number;
-//   memberNo: number;
-//   option: string;
-//   quantity: string;
-// }
-
 interface CartProduct {
   cartNo: number;
   imgUrl: string;
@@ -18,13 +11,14 @@ interface CartProduct {
 }
 
 export async function carts(productNo: number, memberNo: number, option: string, quantity: number) {
-  const res = await instance.post('/carts', {
+  return await instance.post('/carts', {
     productNo: productNo,
     memberNo: memberNo,
     option: option,
     quantity: quantity,
   });
-  window.console.log(res);
+  // return res;
+  // window.console.log(res);
 }
 
 export async function getCart(memberNo: number) {
@@ -35,14 +29,13 @@ export async function getCart(memberNo: number) {
 }
 
 export async function cartPlusMinus(cartNo: number, quantity: number) {
-  const res = await instance.put('/carts', {
+  return await instance.put('/carts', {
     cartNo: cartNo,
     quantity: quantity,
   });
-  window.console.log(res);
 }
 
 export async function cartRemove(cartNo: number) {
-  const res = await instance.delete(`/carts/${cartNo}`);
-  window.console.log(res);
+  return await instance.delete(`/carts/${cartNo}`);
+  // window.console.log(res);
 }

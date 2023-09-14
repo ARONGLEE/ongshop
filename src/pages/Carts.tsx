@@ -1,17 +1,15 @@
 import React from 'react';
-import { getCart } from '../api/carts';
-import { useQuery } from '@tanstack/react-query';
 import CartItem from '../components/CartItem';
 import { LuPlus, LuEqual } from 'react-icons/lu';
 import PriceCard from '../components/PriceCard';
+import useCart from '../hooks/useCart';
 
 const SHIPPING = 3000;
 
 export default function Carts() {
-  const memberNoValue = localStorage.getItem('memberNo')!;
-  const memberNo = parseInt(memberNoValue, 10);
-
-  const { isLoading, data: products } = useQuery(['carts'], () => getCart(memberNo));
+  const {
+    getCartItem: { isLoading, data: products },
+  } = useCart();
 
   if (isLoading) return <p>Loading...</p>;
 

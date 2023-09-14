@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { carts } from '../api/carts';
+// import { carts } from '../api/carts';
 import { useAuthContext } from '../context/AuthContext';
+import useCart from '../hooks/useCart';
 
 export default function ProductDetail() {
   const { user } = useAuthContext();
+  const { addCartItem } = useCart();
   const {
     state: {
       product: { no, imgUrl, explanation, option, price, title },
@@ -12,7 +14,7 @@ export default function ProductDetail() {
   } = useLocation();
 
   const [selected, setSelected] = useState(option && option[0]);
-  const [success, setSuccess] = useState('');
+  const [success, setSuccess] = useState<string | null>('');
   const quantity: number = 1;
   const memberNoValue = localStorage.getItem('memberNo')!;
   const memberNo = parseInt(memberNoValue, 10);
@@ -20,12 +22,16 @@ export default function ProductDetail() {
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
   };
-
+  window.console.log(addCartItem);
   const handleClick = () => {
-    // (no키값을 productNo로 변경해서 보내기)
-    // const product = { no, memberNo: 1, option: selected, quantity: 1 };
-    carts(no, memberNo, selected, quantity);
-    setSuccess('장바구니에 추가되었습니다.');
+    const product = { no, option: selected, quantity };
+    // carts(no, memberNo, selected, quantity);
+    addCartItem.mutate(product, {
+      onSuccess: () => {
+        setSuccess('장바구니에 추가되었습니다.');
+        setTimeout(() => setSuccess(null), 3000);
+      },
+    });
   };
 
   return (
