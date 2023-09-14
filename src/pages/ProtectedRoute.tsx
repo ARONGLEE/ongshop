@@ -7,7 +7,8 @@ interface ProtectedRouteProps {
 }
 
 export default function ProtectedRoute({ children, requireAdmin }: ProtectedRouteProps) {
-  const { user, admin } = useAuthContext();
+  const { user } = useAuthContext();
+  const admin = localStorage.getItem('admin');
 
   if (!user || (requireAdmin && !admin)) {
     return <Navigate to="/" replace />;

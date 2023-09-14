@@ -3,23 +3,35 @@ import { useNavigate } from 'react-router-dom';
 import instance from '../api/axios';
 
 interface Auth {
+  // user: AuthData;
   user: boolean;
-  nickname: string;
-  admin: boolean;
   login: (isIdValue: string, isPwValue: string) => Promise<void>;
 }
 interface Props {
   children: React.ReactNode;
 }
+// interface AuthData {
+//   assessToken: string;
+//   id: string;
+//   admin: boolean;
+//   nickname: string;
+//   memberNo: number;
+// }
 
 const AuthContext = createContext<Auth | null>(null);
 
 export function AuthContextProvider({ children }: Props) {
-  const [user, setUser] = useState<boolean>(false);
-  const [nickname, setNickname] = useState<string>('');
-  const [admin, setAdmin] = useState<boolean>(false);
+  // const [user, setUser] = useState<AuthData>({
+  //   assessToken: '',
+  //   id: '',
+  //   admin: false,
+  //   nickname: '',
+  //   memberNo: 0,
+  // });
+  const [user, setUser] = useState(false);
 
   const navigate = useNavigate();
+
   const login = async (isIdValue: string, isPwValue: string) => {
     const res = await instance.post('/signin', {
       id: isIdValue,
@@ -28,25 +40,26 @@ export function AuthContextProvider({ children }: Props) {
     window.console.log(res);
     if (res.status === 200) {
       window.console.log(res);
-      const token = res.data.data.accessToken;
-      const nickname = res.data.data.nickname;
-      const admin = res.data.data.admin;
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', res.data.result.accessToken);
+      localStorage.setItem('admin', res.data.result.admin);
+      localStorage.setItem('nickname', res.data.result.nickname);
+      localStorage.setItem('memberNo', res.data.result.memberNo);
+      // setUser(res.data.result);
       setUser(true);
-      setNickname(nickname);
-      setAdmin(admin);
       navigate('/');
     }
   };
+  // window.console.log(user);
+  // const authValue = useMutation(({isIdValue: string, isPwValue: string }) => {
+  //   login(isIdValue, isPwValue)
+  // })
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setUser(true);
     }
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ login, user, nickname, admin }}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ login, user }}>{children}</AuthContext.Provider>;
 }
 
 export function useAuthContext() {
