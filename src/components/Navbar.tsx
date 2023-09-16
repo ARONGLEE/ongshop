@@ -8,8 +8,6 @@ export default function Navbar() {
   const { user } = useAuthContext();
   const admin = localStorage.getItem('admin') === 'true';
   const nickname = localStorage.getItem('nickname');
-  window.console.log(admin);
-  window.console.log(user);
 
   return (
     <header className="flex flex-row justify-between py-3 border-b border-gray-300">
@@ -55,6 +53,9 @@ export default function Navbar() {
             className="mx-4 cursor-grabbing"
             onClick={() => {
               localStorage.removeItem('token');
+              localStorage.removeItem('memberNo');
+              localStorage.removeItem('admin');
+              localStorage.removeItem('nickname');
               window.location.replace('/');
             }}
           >
