@@ -1,26 +1,25 @@
-import React from 'react';
 import CartItem from '../components/CartItem';
 import { LuPlus, LuEqual } from 'react-icons/lu';
 import PriceCard from '../components/PriceCard';
 import useCart from '../hooks/useCart';
+import NotFound from './NotFound';
 
 const SHIPPING = 3000;
 
 export default function Carts() {
   const {
-    getCartItem: { isLoading, data: products },
+    getCartItem: { isLoading, data: products, isError },
   } = useCart();
 
   if (isLoading) return <p>Loading...</p>;
 
+  if (isError) return <NotFound />;
+
   const hasProducts = products && products.length > 0;
-  window.console.log(products);
 
   const productTotalPrice: number = hasProducts
     ? products.reduce((prev, current) => prev + current.price * current.quantity, 0)
     : 0;
-
-  // const totalPrice = hasProducts && (productTotalPrice as number) + SHIPPING;
 
   return (
     <section className="p-8 flex flex-col">
