@@ -1,21 +1,7 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ProductCardProp } from '../types/products';
 
-interface Product {
-  no: number;
-  imgUrl: string;
-  title: string;
-  category: string;
-  explanation: string;
-  option: string[];
-  price: number;
-}
-
-interface ProductCardProps {
-  product: Product;
-}
-
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProp) {
   const navigate = useNavigate();
   const { no, imgUrl, title, price, category } = product;
   return (

@@ -1,15 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { cartPlusMinus, cartRemove, carts, getCart } from '../api/carts';
-
-interface CartProp {
-  no: number;
-  option: string;
-  quantity: number;
-}
-interface ChangeQuantityProp {
-  cartNo: number;
-  quantity: number;
-}
+import { CartProp, ChangeQuantityProp } from '../types/carts';
 
 export default function useCart() {
   const memberNoValue = localStorage.getItem('memberNo')!;

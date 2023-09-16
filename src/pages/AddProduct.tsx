@@ -1,20 +1,13 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { upload } from '../api/upload';
 import swal from 'sweetalert';
-
-interface product {
-  title: string;
-  price: number;
-  category: string;
-  explanation: string;
-  option: string;
-}
+import { UploadProduct } from '../types/products';
 
 export default function AddProduct() {
   const [isLoading, setIsLoading] = useState(false);
-  const [product, setProduct] = useState<product>({
+  const [product, setProduct] = useState<UploadProduct>({
     title: '',
-    price: 0,
+    price: '',
     category: '',
     explanation: '',
     option: '',
@@ -27,8 +20,6 @@ export default function AddProduct() {
     if (name === 'file') {
       if (files && files.length > 0) {
         setFile(files[0]);
-        window.console.log(files);
-        window.console.log(files[0]);
       }
       return;
     }
@@ -45,7 +36,7 @@ export default function AddProduct() {
       swal('⭐️ 제품이 등록되었습니다.');
       setIsLoading(false);
       setFile(null);
-      setProduct({ title: '', price: 0, category: '', explanation: '', option: '' });
+      setProduct({ title: '', price: '', category: '', explanation: '', option: '' });
       if (fileInput.current) {
         fileInput.current.value = '';
       }
@@ -118,7 +109,7 @@ export default function AddProduct() {
           disabled={isLoading}
           className="border border-black bg-black text-white font-googleRoboto p-3 my-1.5"
         >
-          {isLoading ? 'Uploading...' : 'Register Product'}
+          {isLoading ? 'Uploading...' : 'ADD PRODUCT'}
         </button>
       </form>
     </div>

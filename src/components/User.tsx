@@ -1,10 +1,5 @@
-import React from 'react';
+import { NicknameProp } from '../types/auth';
 
-interface nickname {
-  user: string | null;
-}
-
-export default function User({ user }: nickname) {
-  window.console.log(user);
+export default function User({ user }: NicknameProp) {
   return <div className="mx-4">{user}</div>;
 }

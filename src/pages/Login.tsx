@@ -1,11 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
-
-interface FormValues {
-  id: string;
-  password: string;
-}
+import { LoginFormType } from '../types/auth';
 
 export default function Login() {
   const { login } = useAuthContext();
@@ -16,11 +12,9 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ mode: 'onChange' });
+  } = useForm<LoginFormType>({ mode: 'onChange' });
 
-  const onSubmit = (data: FormValues) => {
-    window.console.log('dddd');
-    window.console.log(data);
+  const onSubmit = (data: LoginFormType) => {
     const { id, password } = data;
     login(id, password);
   };
@@ -93,9 +87,9 @@ export default function Login() {
           <div className="my-4">
             <button
               type="submit"
-              className="w-full border border-black bg-black text-white p-3 font-nanumSquareNeoR"
+              className="w-full border border-black bg-black text-white p-3 font-googleRoboto"
             >
-              로그인
+              LOGIN
             </button>
             <button
               className="font-semibold text-sm mt-3 font-nanumSquareNeoR"

@@ -2,13 +2,7 @@ import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../api/auth';
-
-interface FormValues {
-  id: string;
-  nickname: string;
-  password: string;
-  passwordCheck: string;
-}
+import { SignupFormType } from '../types/auth';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -18,13 +12,12 @@ export default function Signup() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormValues>({ mode: 'onChange' });
+  } = useForm<SignupFormType>({ mode: 'onChange' });
 
   const password = useRef<string>('');
   password.current = watch('password');
 
-  const onSubmit = (data: FormValues) => {
-    window.console.log(data);
+  const onSubmit = (data: SignupFormType) => {
     const { id, password, nickname } = data;
     signup(id, nickname, password)
       .then(() => {
@@ -156,17 +149,11 @@ export default function Signup() {
             )}
           </label>
           <div className="flex flex-row justify-center my-4">
-            {/* <button
-              className="w-1/4 border border-black p-3 mr-3 font-nanumSquareNeoR"
-              onClick={() => navigate(-1)}
-            >
-              취소
-            </button> */}
             <button
               type="submit"
-              className="w-1/4 border border-black bg-black text-white p-3 font-nanumSquareNeoR"
+              className="w-full border border-black bg-black text-white p-3 font-googleRoboto"
             >
-              가입완료
+              SIGNUP
             </button>
           </div>
         </form>
