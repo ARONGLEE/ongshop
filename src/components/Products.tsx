@@ -1,28 +1,20 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useProducts from '../hooks/useProducts';
-
 import NotFound from '../pages/NotFound';
 import ProductCard from './ProductCard';
 
 export default function Products() {
   const { ref, inView } = useInView();
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError } = useProducts();
-
-  window.console.log('여기찍히나요');
+  const { data, fetchNextPage, isFetchingNextPage, isError } = useProducts();
 
   if (isError) {
     return <NotFound />;
   }
 
   useEffect(() => {
-    window.console.log(inView);
     if (inView) fetchNextPage();
   }, [inView]);
-
-  window.console.log(data);
-  window.console.log(data?.pages[0].productList);
-  window.console.log(hasNextPage);
 
   return (
     <>

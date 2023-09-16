@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-// import { carts } from '../api/carts';
 import { useAuthContext } from '../context/AuthContext';
 import useCart from '../hooks/useCart';
 
@@ -16,16 +15,11 @@ export default function ProductDetail() {
   const [selected, setSelected] = useState(option && option[0]);
   const [success, setSuccess] = useState<string | null>('');
   const quantity: number = 1;
-  const memberNoValue = localStorage.getItem('memberNo')!;
-  const memberNo = parseInt(memberNoValue, 10);
-  window.console.log(memberNo);
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
   };
-  window.console.log(addCartItem);
   const handleClick = () => {
     const product = { no, option: selected, quantity };
-    // carts(no, memberNo, selected, quantity);
     addCartItem.mutate(product, {
       onSuccess: () => {
         setSuccess('장바구니에 추가되었습니다.');
@@ -57,7 +51,7 @@ export default function ProductDetail() {
         <button
           className="border border-black bg-black text-white font-googleRoboto p-3 my-1.5"
           onClick={handleClick}
-          disabled={user === null || undefined || false}
+          disabled={user === false || undefined}
         >
           {`ADD \u00A0\u00A0\u00A0\u00A0 ₩${price}`}
         </button>
