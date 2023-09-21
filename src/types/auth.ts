@@ -1,24 +1,24 @@
-export interface NicknameProp {
+export type NicknameProp = {
   user: string | null;
-}
+};
 
 export interface Auth {
   user: boolean;
   login: (isIdValue: string, isPwValue: string) => Promise<void>;
 }
 
-export interface Props {
+export type Props = {
   children: React.ReactNode;
-}
+};
 
-export interface LoginFormType {
+export type LoginFormType = {
   id: string;
   password: string;
-}
+};
 
-export interface SignupFormType {
+export type SignupFormType = {
   id: string;
   nickname: string;
   password: string;
   passwordCheck: string;
-}
+};

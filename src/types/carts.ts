@@ -1,4 +1,4 @@
-export interface CartProduct {
+export type CartProduct = {
   cartNo: number;
   imgUrl: string;
   option: string;
@@ -6,20 +6,20 @@ export interface CartProduct {
   productNo: number;
   quantity: number;
   title: string;
-}
+};
 
-export interface ChangeQuantityProp {
+export type ChangeQuantityProp = {
   cartNo: number;
   quantity: number;
-}
+};
 
-export interface CartProp {
+export type CartProp = {
   no: number;
   option: string;
   quantity: number;
-}
+};
 
-export interface PriceProp {
+export type PriceProp = {
   text: string;
   price: number;
-}
+};

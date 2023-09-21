@@ -1,4 +1,4 @@
-export interface Product {
+export type Product = {
   no: number;
   imgUrl: string;
   title: string;
@@ -6,16 +6,16 @@ export interface Product {
   explanation: string;
   option: string[];
   price: number;
-}
+};
 
-export interface ProductCardProp {
+export type ProductCardProp = {
   product: Product;
-}
+};
 
-export interface UploadProduct {
+export type UploadProduct = {
   title: string;
   price: string;
   category: string;
   explanation: string;
   option: string;
-}
+};
