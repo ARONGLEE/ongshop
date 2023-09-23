@@ -1,46 +1,107 @@
-# Getting Started with Create React App
+# 🗓️ 프로젝트 기간
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 2023.8.19 ~ 2023.9.17
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+# ✨ 프로젝트 설명
 
-### `npm start`
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 📌 프로젝트 실행 방법
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Clone the repo
 
-### `npm test`
+```javascript
+$ git clone https://github.com/ARONGLEE/ongshop.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install npm packages
 
-### `npm run build`
+```javascript
+$ npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```javascript
+$ npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Login <br/>
+   일반 계정 : 회원가입 후 로그인 <br/>
+   어드민 계정 : 아이디 adminTest / 비밀번호 qwe1234!
 
-### `npm run eject`
+<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# 🛠️ 기술스택
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<p>
+ <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+ <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=black">
+ <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=black">
+ <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=black">
+ <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=black">
+ <img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=black">
+</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br />
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# 🚀 배포 페이지
 
-## Learn More
+### [ONGSHOP 배포 링크](https://ongshop.netlify.app/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br/>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# 📂 폴더 구조
+
+```javascript
+📦src
+ ┣ 📂api
+ ┃ ┣ 📜auth.ts
+ ┃ ┣ 📜axios.ts
+ ┃ ┣ 📜carts.ts
+ ┃ ┣ 📜products.ts
+ ┃ ┗ 📜upload.ts
+ ┣ 📂components
+ ┃ ┣ 📜CartItem.tsx
+ ┃ ┣ 📜CartStatus.tsx
+ ┃ ┣ 📜Navbar.tsx
+ ┃ ┣ 📜PriceCard.tsx
+ ┃ ┣ 📜ProductCard.tsx
+ ┃ ┣ 📜Products.tsx
+ ┃ ┗ 📜User.tsx
+ ┣ 📂context
+ ┃ ┗ 📜AuthContext.tsx
+ ┣ 📂fonts
+ ┃ ┣ 📜NanumSquareNeoOTF-Lt.otf
+ ┃ ┣ 📜NanumSquareNeoOTF-Rg.otf
+ ┃ ┣ 📜Oswald-VariableFont_wght.ttf
+ ┃ ┗ 📜RobotoCondensed-Light.ttf
+ ┣ 📂hooks
+ ┃ ┣ 📜useCart.tsx
+ ┃ ┗ 📜useProducts.tsx
+ ┣ 📂pages
+ ┃ ┣ 📜AddProduct.tsx
+ ┃ ┣ 📜AllProducts.tsx
+ ┃ ┣ 📜Carts.tsx
+ ┃ ┣ 📜Home.tsx
+ ┃ ┣ 📜Login.tsx
+ ┃ ┣ 📜NotFound.tsx
+ ┃ ┣ 📜ProductDetail.tsx
+ ┃ ┣ 📜ProtectedRoute.tsx
+ ┃ ┗ 📜Signup.tsx
+ ┣ 📂types
+ ┃ ┣ 📜auth.ts
+ ┃ ┣ 📜carts.ts
+ ┃ ┣ 📜products.ts
+ ┃ ┗ 📜route.ts
+ ┣ 📜App.css
+ ┣ 📜App.test.tsx
+ ┣ 📜App.tsx
+ ┣ 📜index.css
+ ┣ 📜index.tsx
+ ┣ 📜react-app-env.d.ts
+ ┣ 📜reportWebVitals.ts
+ ┗ 📜setupTests.ts
+```
