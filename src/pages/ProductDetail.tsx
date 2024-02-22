@@ -29,12 +29,16 @@ export default function ProductDetail() {
   };
 
   return (
-    <section className="flex flex-col md:flex-row p-4">
-      <img className="w-full max-w-[60%] px-4 basis-1/2" src={imgUrl} alt={title} />
-      <div className="w-full max-w-[40%] basis-1/2 flex flex-col p-4">
-        <h2 className="text-3xl font-bold py-2 font-nanumSquareNeoR">{title}</h2>
-        <p className="py-4 text-lg font-nanumSquareNeoL">{explanation}</p>
-        <div className="flex items-center pb-4">
+    <section className="flex flex-col md:flex-row p-4 justify-center">
+      <img
+        className="w-full md:max-w-[60%] max-h-[30rem] px-4 basis-1/2"
+        src={imgUrl}
+        alt={title}
+      />
+      <div className="w-full md:max-w-[40%] basis-1/2 flex flex-col p-4">
+        <h2 className="text-xl md:text-3xl font-bold py-2 font-nanumSquareNeoR">{title}</h2>
+        <p className="py-4 text-sm md:text-lg font-nanumSquareNeoL">{explanation}</p>
+        <div className="flex items-center pb-4 text-sm md:text-lg">
           <label htmlFor="select" className="pr-3 font-semibold font-nanumSquareNeoR">
             옵션:
           </label>

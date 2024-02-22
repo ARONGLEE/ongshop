@@ -28,17 +28,19 @@ export default function CartItem({
 
   return (
     <>
-      <li className="flex justify-between my-2 items-center">
+      <li className="flex justify-between my-4 md:my-2 items-center">
         <img src={imgUrl} alt={title} className="w-24 md:w-48 max-h-32" />
-        <div className="flex flex-1 justify-between ml-4">
-          <div className="basis-3/5">
-            <p className="text-base font-nanumSquareNeoL">{title}</p>
-            <p className="text-base font-semibold font-googleRoboto">{option}</p>
-            <p className="text-sm font-semibold font-nanumSquareNeoR">₩{price}</p>
+        <div className="flex flex-col md:flex-row flex-1 justify-between ml-4 gap-2">
+          <div className="basis-3/5 flex flex-col">
+            <div className="flex flex-row gap-1 md:flex-col">
+              <p className="text-sm md:text-base font-nanumSquareNeoL">{title}</p>
+              <p className="text-sm md:text-base font-semibold font-googleRoboto">{option}</p>
+            </div>
+            <p className="text-xs md:text-sm font-semibold font-nanumSquareNeoR">₩{price}</p>
           </div>
-          <div className="text-lg flex items-center">
+          <div className="text-base md:text-lg flex items-center">
             <AiOutlineMinusSquare className={ICON_CLASS} onClick={handleMinus} />
-            <span className="text-base font-nanumSquareNeoR">{quantity}</span>
+            <span className="text-sm md:text-base font-nanumSquareNeoR">{quantity}</span>
             <AiOutlinePlusSquare className={ICON_CLASS} onClick={handlePlus} />
             <RiDeleteBin5Fill className={ICON_CLASS} onClick={handleDelete} />
           </div>

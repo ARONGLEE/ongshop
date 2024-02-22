@@ -45,7 +45,7 @@ export default function AddProduct() {
 
   return (
     <div className="flex flex-col my-5 w-7/12 mx-auto">
-      <p className="text-lg text-center font-nanumSquareNeoR font-semibold pb-4">상품 등록</p>
+      <p className="text-lg text-start font-nanumSquareNeoR font-semibold pb-4">상품 등록</p>
 
       {file && (
         <img src={URL.createObjectURL(file)} className="max-h-[35rem] mt-5" alt="local file" />
