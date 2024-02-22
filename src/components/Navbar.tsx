@@ -19,7 +19,12 @@ export default function Navbar() {
   return (
     <header className="flex flex-row justify-between py-3 border-b border-black">
       <Link to="/">
-        <h1 className="mx-4 text-3xl font-bold font-googleOswald cursor-grabbing">ONGSHOP</h1>
+        <h1
+          className="mx-4 text-3xl font-bold font-googleOswald cursor-grabbing"
+          onClick={handleMenuItemClick}
+        >
+          ONGSHOP
+        </h1>
       </Link>
       <nav className="flex items-center text-base font-googleRoboto">
         <div className="md:hidden px-4 cursor-grabbing">
